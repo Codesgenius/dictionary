@@ -1,0 +1,19 @@
+.suggestion-con {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgb(31, 29, 29);
+    color: snow;
+    border-radius: 10px;
+}
+
+.suggestion-item {
+    padding: 10px;
+    font-size: 18PX;
+    border-bottom: 1px solid white;
+    cursor: pointer;
+}
+.suggestion-item:hover {
+    background-color: rgb(37, 4, 68);
+}
