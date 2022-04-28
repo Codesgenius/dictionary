@@ -44,6 +44,15 @@
     background-color: antiquewhite;
 }
 
+.search-button:hover {
+    background-color: black;
+    color: snow;
+}
+
+.search-cancel:hover {
+    color: red;
+}
+
 .input-box>input {
     height: 100%;
     width: 100%;

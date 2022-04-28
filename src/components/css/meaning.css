@@ -13,8 +13,9 @@
 
 .definition h2 {
     font-style: italic;
+    margin-top: 0;
 }
 
 .definition li > p {
-    font-size: 1.1em;
+    font-size: 17px;
 }

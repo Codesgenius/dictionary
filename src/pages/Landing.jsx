@@ -20,6 +20,8 @@ const Landing = () => {
     }
 
     const searchWord = () => {
+        if (searchText === "") 
+            return
         fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchText}`)
             .then((data) => data.json())
             .then((res) => {
@@ -31,6 +33,8 @@ const Landing = () => {
     }
 
     const searchSuggestion = (text) => {
+        if (text === "") 
+            return
         fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${text}`)
             .then((data) => data.json())
             .then((res) => {
@@ -82,7 +86,7 @@ const Landing = () => {
     return (
         <div className='landing'>
             <TopBar {...actions} suggestions={suggestions} searchText={searchText} />
-            {meanings.length > 0 && <Main data={meanings[0]} onReferenceClick={searchSuggestion} />}
+            {meanings.length > 0 && <Main data={meanings} onReferenceClick={searchSuggestion} />}
         </div>
     )
 }
