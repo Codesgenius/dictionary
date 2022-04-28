@@ -1,4 +1,5 @@
 import React from 'react'
+import './css/notfound.css'
 
 const NotFound = ({data}) => {
     const {message, resolution, title} = data

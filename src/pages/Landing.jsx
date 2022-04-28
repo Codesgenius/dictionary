@@ -6,7 +6,7 @@ import Random from '../components/Random'
 import TopBar from '../components/TopBar'
 
 const Landing = () => {
-    const [word, setWord] = useState({})
+    const [word, setWord] = useState("")
     const [errMsg, setErrMsg] = useState("")
     const [meanings, setMeanings] = useState([])
     const [searchText, setSearchText] = useState("")
@@ -29,14 +29,17 @@ const Landing = () => {
             .then((data) => data.json())
             .then((res) => {
                 setSearchText(text)
-                setWord({})
+                setWord("")
                 setSuggestions([])
 
                 if(res.message){
                     setErrMsg(res)
-                    return
+                    setMeanings([])
                 }
-                setMeanings(res)
+                else {
+                    setMeanings(res)
+                    setErrMsg("")
+                }
                 console.log(res)
             })
             .catch((err) => { console.log(err) })
@@ -87,8 +90,8 @@ const Landing = () => {
         <div className='landing'>
             <TopBar {...actions} suggestions={suggestions} searchText={searchText} />
             {meanings.length > 0 && <Main data={meanings} onReferenceClick={searchSuggestion} />}
-            {meanings.length === 0 && <Random data={word} />}
-            {errMsg.length > 0 && <NotFound data={errMsg}/>}
+            {word !== "" && <Random data={word} />}
+            {errMsg !== "" && <NotFound data={errMsg}/>}
         </div>
     )
 }
