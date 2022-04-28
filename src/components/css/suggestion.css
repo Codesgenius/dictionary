@@ -14,6 +14,11 @@
     border-bottom: 1px solid white;
     cursor: pointer;
 }
+
+.suggestion-item:nth-last-child(1) {
+    border-bottom: none;
+}
+
 .suggestion-item:hover {
     background-color: rgb(37, 4, 68);
 }
