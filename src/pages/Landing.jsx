@@ -13,8 +13,6 @@ const Landing = () => {
     const [suggestions, setSuggestions] = useState("")
     const [periodic, setPeriodic] = useState(0)
 
-
-
     const fetchSuggestions = (text) => {
         fetch(`https://api.datamuse.com/sug?s=${text}`)
             .then((data) => data.json())
@@ -64,7 +62,7 @@ const Landing = () => {
         //avoid api request after every change
         setPeriodic(setTimeout(() => {
             fetchSuggestions(text)
-        }, 400))
+        }, 450))
     }
 
     const clearWord = () => {
