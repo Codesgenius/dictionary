@@ -1,8 +1,29 @@
 import React from 'react'
-import Definition from './Definition'
-import LinkedWords from './LinkedWords'
+import './css/meaning.css'
 
-const Meaning = ({ meaning }) => {
+const Definition = ({ definition, example }) => {
+    return (
+        <li>
+            <p>{definition}</p>
+            <blockquote><i>{example}</i></blockquote>
+        </li>
+    )
+}
+
+const LinkedWords = ({ data, name, onReferenceClick }) => {
+    const uniqueData = [...new Set(data)]
+
+    return (
+        <div className='linked-word-con'>
+            <span><strong>{name} : </strong></span>
+            {uniqueData.map((item, index) => {
+                return (<span key={index}><span className='ref-item' onClick={() => { onReferenceClick(item) }}>{item}</span> {index === data.length - 1 ? "" : ", "}</span>)
+            })}
+        </div>
+    )
+}
+
+const Meaning = ({ meaning, onReferenceClick }) => {
     const { partOfSpeech, definitions, synonyms, antonyms } = meaning
     return (
         <div className='definition'>
@@ -13,8 +34,8 @@ const Meaning = ({ meaning }) => {
                 })}
             </ol>
 
-            {synonyms.length > 0 && <LinkedWords data={synonyms} name="Synonyms" />}
-            {antonyms.length > 0 && <LinkedWords data={antonyms} name="Antonyms" />}
+            {synonyms.length > 0 && <LinkedWords data={synonyms} onReferenceClick={onReferenceClick} name="Synonyms" />}
+            {antonyms.length > 0 && <LinkedWords data={antonyms} onReferenceClick={onReferenceClick} name="Antonyms" />}
         </div>
     )
 }

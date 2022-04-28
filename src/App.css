@@ -1,12 +1,9 @@
-.App {
-  text-align: center;
+p {
+  margin-bottom: 0;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+blockquote {
+  margin: 0;
 }
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

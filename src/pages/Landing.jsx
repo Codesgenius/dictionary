@@ -4,7 +4,7 @@ import Main from '../components/Main'
 import TopBar from '../components/TopBar'
 
 const Landing = () => {
-    const [word, setWord] = useState("")
+    // const [word, setWord] = useState("")
     const [meanings, setMeanings] = useState([])
     const [searchText, setSearchText] = useState("")
     const [suggestions, setSuggestions] = useState("")
@@ -20,7 +20,6 @@ const Landing = () => {
     }
 
     const searchWord = () => {
-        setWord(searchText)
         fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchText}`)
             .then((data) => data.json())
             .then((res) => {
@@ -56,7 +55,7 @@ const Landing = () => {
             return
         }
         //store timeout
-        setPeriodic(setTimeout(fetchSuggestions(text), 500))
+        setPeriodic(setTimeout(fetchSuggestions(text), 2000))
     }
 
     const clearWord = () => {
@@ -83,7 +82,7 @@ const Landing = () => {
     return (
         <div className='landing'>
             <TopBar {...actions} suggestions={suggestions} searchText={searchText} />
-            {meanings.length > 0 && <Main data={meanings[0]} />}
+            {meanings.length > 0 && <Main data={meanings[0]} onReferenceClick={searchSuggestion} />}
         </div>
     )
 }
