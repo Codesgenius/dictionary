@@ -1,10 +1,13 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import Main from '../components/Main'
+import NotFound from '../components/NotFound'
+import Random from '../components/Random'
 import TopBar from '../components/TopBar'
 
 const Landing = () => {
-    // const [word, setWord] = useState("")
+    const [word, setWord] = useState({})
+    const [errMsg, setErrMsg] = useState("")
     const [meanings, setMeanings] = useState([])
     const [searchText, setSearchText] = useState("")
     const [suggestions, setSuggestions] = useState("")
@@ -19,31 +22,29 @@ const Landing = () => {
             .catch((err) => { console.log(err) })
     }
 
-    const searchWord = () => {
-        if (searchText === "") 
-            return
-        fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchText}`)
-            .then((data) => data.json())
-            .then((res) => {
-                console.log(res)
-                setMeanings(res)
-                setSuggestions([])
-            })
-            .catch((err) => { console.log(err) })
-    }
-
     const searchSuggestion = (text) => {
-        if (text === "") 
+        if (text === "")
             return
         fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${text}`)
             .then((data) => data.json())
             .then((res) => {
                 setSearchText(text)
-                setMeanings(res)
+                setWord({})
                 setSuggestions([])
+
+                if(res.message){
+                    setErrMsg(res)
+                    return
+                }
+                setMeanings(res)
                 console.log(res)
             })
             .catch((err) => { console.log(err) })
+    }
+
+    
+    const searchWord = () => {
+        searchSuggestion(searchText)
     }
 
     const updateSearchText = (evt) => {
@@ -75,18 +76,19 @@ const Landing = () => {
     }
 
     useEffect(() => {
-        // fetch("https://api.dictionaryapi.dev/api/v2/entries/en/new")
-        //     .then((data) => data.json())
-        //     .then((res) => {
-        //         console.log(res)
-        //         console.log(res)
-        //     })
+        fetch("https://random-words-api.vercel.app/word")
+            .then((data) => data.json())
+            .then((res) => {
+                setWord(res[0])
+            })
     }, [])
 
     return (
         <div className='landing'>
             <TopBar {...actions} suggestions={suggestions} searchText={searchText} />
             {meanings.length > 0 && <Main data={meanings} onReferenceClick={searchSuggestion} />}
+            {meanings.length === 0 && <Random data={word} />}
+            {errMsg.length > 0 && <NotFound data={errMsg}/>}
         </div>
     )
 }

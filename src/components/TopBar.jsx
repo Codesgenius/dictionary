@@ -18,9 +18,7 @@ const TopBar = ({ searchText, onCustomChange, onSearchWord, onClearWord, suggest
 
     return (
         <div className='topbar'>
-            <div className="app-image">
-                <img src={logo} alt="" />
-            </div>
+            <div className="app-image"></div>
 
             <div className="search-con">
                 <div className='search-inner'>

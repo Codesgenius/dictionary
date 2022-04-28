@@ -1,20 +1,26 @@
 .topbar {
-    background-color: blue;
-    padding: 10px;
+    position: relative;
+    background-color: rgb(7, 36, 92);
+    padding: 60px 15px 5px 15px;
 }
 
 .app-image {
-    height: 50px;
-}
-
-.topbar img {
-    width: 100;
-    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70%;
+    z-index: 1;
+    background: url('../../asset/imgs/logo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .search-con {
+    z-index: 2;
     position: relative;
-    width: 600px;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -36,16 +42,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
     cursor: pointer;
 }
 
+.search-cancel {
+    color: black;
+}
+
 .search-button {
-    background-color: antiquewhite;
+    color: blue;
+    background-color: rgb(215, 229, 250);
+    transition: all .5s ease;
 }
 
 .search-button:hover {
-    background-color: black;
+    background-color: rgb(17, 19, 136);
     color: snow;
 }
 
@@ -61,4 +72,18 @@
     font-size: 22px;
     padding-left: 10px;
     padding-right: 60px;
+}
+
+@media (min-width: 600px) {
+    .topbar {
+        padding: 15px;
+    }
+    .app-image {
+        position: initial;
+        height: 80px;
+        width: 300px;
+    }
+    .search-con {
+        width: 600px;
+    }
 }

@@ -17,7 +17,12 @@ const LinkedWords = ({ data, name, onReferenceClick }) => {
         <div className='linked-word-con'>
             <span><strong>{name} : </strong></span>
             {uniqueData.map((item, index) => {
-                return (<span key={index}><span className='ref-item' onClick={() => { onReferenceClick(item) }}>{item}</span> {index === data.length - 1 ? "" : ", "}</span>)
+                return (
+                    <span key={index}>
+                        <span className='ref-item' onClick={() => { onReferenceClick(item) }}>{item}</span>
+                        {index === data.length - 1 ? "" : ", "}
+                    </span>
+                )
             })}
         </div>
     )

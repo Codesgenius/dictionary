@@ -21,3 +21,9 @@
 .word-play:hover {
     color: gray;
 }
+
+@media (min-width: 600px){
+    .main {
+        padding: 10px 30px;
+    }
+}

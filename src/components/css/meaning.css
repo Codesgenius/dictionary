@@ -3,17 +3,19 @@
 }
 
 .ref-item {
-    color: blue;
+    color: rgb(151, 151, 241);
     cursor: pointer;
 }
 
 .ref-item:hover {
-    color: blueviolet;
+    color: blue;
 }
 
 .definition h2 {
     font-style: italic;
     margin-top: 0;
+    
+    color: rgb(241, 194, 62);
 }
 
 .definition li > p {
