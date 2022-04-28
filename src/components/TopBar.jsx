@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react'
 import Suggestions from './Suggestions'
 import { FaTimes, FaSearch } from 'react-icons/fa'
 import './css/topbar.css'
-import logo from '../asset/imgs/logo.jpg'
 
 const TopBar = ({ searchText, onCustomChange, onSearchWord, onClearWord, suggestions, onItemClick }) => {
     const inputRef = useRef(null)

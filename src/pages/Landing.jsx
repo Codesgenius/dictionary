@@ -1,17 +1,19 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Main from '../components/Main'
 import NotFound from '../components/NotFound'
 import Random from '../components/Random'
 import TopBar from '../components/TopBar'
 
 const Landing = () => {
-    const [word, setWord] = useState("")
+    const [mode, setMode] = useState("random")
     const [errMsg, setErrMsg] = useState("")
     const [meanings, setMeanings] = useState([])
     const [searchText, setSearchText] = useState("")
     const [suggestions, setSuggestions] = useState("")
     const [periodic, setPeriodic] = useState(0)
+
+
 
     const fetchSuggestions = (text) => {
         fetch(`https://api.datamuse.com/sug?s=${text}`)
@@ -29,23 +31,21 @@ const Landing = () => {
             .then((data) => data.json())
             .then((res) => {
                 setSearchText(text)
-                setWord("")
                 setSuggestions([])
 
-                if(res.message){
+                if (res.message) {
                     setErrMsg(res)
-                    setMeanings([])
+                    setMode("error")
                 }
                 else {
                     setMeanings(res)
-                    setErrMsg("")
+                    setMode("definition")
                 }
-                console.log(res)
             })
             .catch((err) => { console.log(err) })
     }
 
-    
+
     const searchWord = () => {
         searchSuggestion(searchText)
     }
@@ -57,13 +57,14 @@ const Landing = () => {
             clearTimeout(periodic)
         }
 
-        //Clear suggestions
         if (text === "") {
             setSuggestions([])
             return
         }
-        //store timeout
-        setPeriodic(setTimeout(fetchSuggestions(text), 2000))
+        //avoid api request after every change
+        setPeriodic(setTimeout(() => {
+            fetchSuggestions(text)
+        }, 400))
     }
 
     const clearWord = () => {
@@ -78,20 +79,12 @@ const Landing = () => {
         onItemClick: searchSuggestion,
     }
 
-    useEffect(() => {
-        fetch("https://random-words-api.vercel.app/word")
-            .then((data) => data.json())
-            .then((res) => {
-                setWord(res[0])
-            })
-    }, [])
-
     return (
         <div className='landing'>
             <TopBar {...actions} suggestions={suggestions} searchText={searchText} />
-            {meanings.length > 0 && <Main data={meanings} onReferenceClick={searchSuggestion} />}
-            {word !== "" && <Random data={word} />}
-            {errMsg !== "" && <NotFound data={errMsg}/>}
+            {meanings.length > 0 && mode === "definition" && <Main data={meanings} onReferenceClick={searchSuggestion} />}
+            {mode === "random" && <Random />}
+            {mode === "error" && <NotFound data={errMsg} />}
         </div>
     )
 }
