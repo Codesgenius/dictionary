@@ -1,7 +1,7 @@
 # Getting Started with My Dictionary App
 
 This project was created with `React`
-This project is also live at [codesgenius.github.io/dictionary](https://codesgenius.github.io/codesgenius.github.io-dictionary)
+This project is also live at [dictionary app](https://codesgenius.github.io/codesgenius.github.io-dictionary)
 
 ### `Available branches`
 
